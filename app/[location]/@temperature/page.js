@@ -1,11 +1,19 @@
-import React from 'react'
+import TemperatureComponent from "@/components/TemperatureComponent";
 
-const TemperaturePage = () => {
-  return (
-    <div>
-      TemperaturePage
-    </div>
-  )
-}
+import NoLocationInfo from "@/components/NoLocationInfo";
+import { getResolvedLatLong } from "@/lib/location-info";
 
-export default TemperaturePage
+const TemperaturePage = async ({
+    params: { location },
+    searchParams: { latitude, longitude },
+}) => {
+    const resolved = await getResolvedLatLong(location, latitude, longitude);
+
+    if (resolved?.lat && resolved?.lon) {
+        return <TemperatureComponent lat={resolved.lat} lon={resolved.lon} />;
+    } else {
+        return <NoLocationInfo />;
+    }
+};
+
+export default TemperaturePage;

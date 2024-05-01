@@ -21,6 +21,7 @@ export default function RootLayout({
       <div className="overlay"></div>
       <Image
         src="/background.png"
+        alt="bg-img"
         className="bg-img"
         width={700}
         height={1200}
